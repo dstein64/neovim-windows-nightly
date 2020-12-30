@@ -38,7 +38,23 @@ jobs:
       shell: powershell
       run: Compress-Archive Neovim nvim-win64.zip
 
-    - name: Upload
-      uses: actions/upload-artifact@v2
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        path: nvim-win64.zip
+        tag_name: nightly
+        release_name: NVIM Nightly
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./nvim-win64.zip
+        asset_name: nvim-win64.zip
+        asset_content_type: application/zip
