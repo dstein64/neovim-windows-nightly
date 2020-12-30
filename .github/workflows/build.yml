@@ -11,17 +11,34 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout neovim-windows-nightly
-      uses: actions/checkout@v2
-
     - name: Checkout neovim
       uses: actions/checkout@v2
       with:
         repository: neovim/neovim
-        path: neovim
+        path: repo
 
     - name: Build
       shell: cmd
       run: |
         call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
-        .\build.bat
+        cd repo
+        mkdir .deps
+        cd .deps
+        cmake -G Ninja -DCMAKE_BUILD_TYPE=Release ..\third-party
+        cmake --build .
+        cd ..
+        mkdir build
+        cd build
+        cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=..\..\Neovim ..
+        cmake --build .
+        ninja
+        ninja install
+
+    - name: Zip
+      shell: powershell
+      run: Compress-Archive Neovim nvim-win64.zip
+
+    - name: Upload
+      uses: actions/upload-artifact@v2
+      with:
+        path: nvim-win64.zip
