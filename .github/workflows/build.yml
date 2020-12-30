@@ -18,4 +18,6 @@ jobs:
         path: neovim
 
     - name: Build
-      run: cmd.exe /C build.bat
+      run: |
+      pwd
+      cmd.exe /C .\build.bat
