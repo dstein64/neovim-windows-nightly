@@ -19,5 +19,5 @@ jobs:
 
     - name: Build
       run: |
-      pwd
-      cmd.exe /C .\build.bat
+        pwd
+        cmd.exe /C .\build.bat
