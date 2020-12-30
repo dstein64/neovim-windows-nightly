@@ -11,14 +11,14 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout
+    - name: Checkout neovim-windows-nightly
+      uses: actions/checkout@v2
+
+    - name: Checkout neovim
       uses: actions/checkout@v2
       with:
         repository: neovim/neovim
         path: neovim
 
     - name: Build
-      run: |
-        pwd
-        dir
-        cmd.exe /C .\build.bat
+      run: cmd.exe /C build.bat
