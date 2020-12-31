@@ -19,9 +19,10 @@ jobs:
 
     - name: Create timestamp
       id: timestamp
+      shell: powershell
       run: |
         $timestamp = Get-Date -Format o | ForEach-Object { $_ -replace ":", "." }
-        echo "timestamp=$timestamp" >> $Env:GITHUB_ENV
+        echo "timestamp=$timestamp" | Out-File -FilePath $Env:GITHUB_ENV -Append
 
     - name: Build
       shell: cmd
