@@ -22,8 +22,7 @@ jobs:
       shell: powershell
       run: |
         $timestamp = Get-Date -Format o | ForEach-Object { $_ -replace ":", "." }
-        echo "timestamp=$timestamp"
-        echo "timestamp=$timestamp" | Out-File -FilePath $Env:GITHUB_ENV -Append
+        echo "timestamp=$timestamp" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
 
     - name: Build
       shell: cmd
@@ -58,8 +57,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: nightly-${{ steps.timestamp.outputs.timestamp }}
-        release_name: nightly-${{ steps.timestamp.outputs.timestamp }}
+        tag_name: nightly-${{ env.timestamp }}
+        release_name: nightly-${{ env.timestamp }}
         draft: false
         prerelease: false
 
