@@ -22,7 +22,7 @@ jobs:
       shell: powershell
       run: |
         $timestamp = Get-Date -Format o | ForEach-Object { $_ -replace ":", "." }
-        cat "timestamp=$timestamp"
+        echo "timestamp=$timestamp"
         echo "timestamp=$timestamp" | Out-File -FilePath $Env:GITHUB_ENV -Append
 
     - name: Build
