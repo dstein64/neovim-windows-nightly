@@ -17,6 +17,12 @@ jobs:
         repository: neovim/neovim
         path: repo
 
+    - name: Create timestamp
+      id: timestamp
+      run: |
+        $timestamp = Get-Date -Format o | ForEach-Object { $_ -replace ":", "." }
+        echo "timestamp=$timestamp" >> $GITHUB_ENV
+
     - name: Build
       shell: cmd
       run: |
@@ -50,8 +56,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: nightly
-        release_name: NVIM Nightly
+        tag_name: nightly-${{ steps.timestamp.outputs.timestamp }}
+        release_name: nightly-${{ steps.timestamp.outputs.timestamp }}
         draft: false
         prerelease: false
 
