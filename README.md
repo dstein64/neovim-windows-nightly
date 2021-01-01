@@ -1,11 +1,9 @@
 # neovim-windows-nightly
 
 This project has a GitHub Actions workflow that builds Neovim (x64) on Windows.
-The code is scheduled to run nightly.
+The code was scheduled to run nightly, as a temporary workaround for the pause
+in official Neovim Windows nightly  builds starting at the end of November 2020.
 
-The nightly Neovim package is available on the [Releases][releases] page.
-
-This is a temporary workaround for the pause in official Neovim Windows nightly
-builds starting at the end of November 2020.
-
-[releases]: https://github.com/dstein64/neovim-windows-nightly/releases
+:warning: As of Neovim [PR #13650](https://github.com/neovim/neovim/pull/13650),
+official Neovim Windows nightly builds have resumed, and are available on the
+Neovim [Releases](https://github.com/neovim/neovim/releases) page.
