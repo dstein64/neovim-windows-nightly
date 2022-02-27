@@ -4,6 +4,7 @@ name: build
 permissions:
   contents: read
 on:
+  workflow_dispatch:
   schedule:
     # Run nightly (* is a special character in YAML, so quote the string)
     - cron: '0 0 * * *'
