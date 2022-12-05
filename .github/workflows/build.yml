@@ -34,7 +34,7 @@ jobs:
         cd repo
         mkdir .deps
         cd .deps
-        cmake -G Ninja -DCMAKE_BUILD_TYPE=Release ..\third-party
+        cmake -G Ninja -DCMAKE_BUILD_TYPE=Release ..\cmake.deps
         cmake --build .
         cd ..
         mkdir build
