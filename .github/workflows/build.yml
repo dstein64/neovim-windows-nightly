@@ -65,9 +65,11 @@ jobs:
         draft: false
         prerelease: false
 
+  release:
+    permissions:
+      contents: write
+    steps:
     - name: Upload Release Asset
-      permissions:
-        contents: write
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
