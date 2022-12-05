@@ -66,6 +66,8 @@ jobs:
         prerelease: false
 
   release:
+    needs: build
+
     runs-on: ubuntu-latest
 
     permissions:
