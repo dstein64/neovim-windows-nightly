@@ -16,13 +16,6 @@ jobs:
         repository: neovim/neovim
         path: repo
 
-    - name: Create timestamp
-      id: timestamp
-      shell: powershell
-      run: |
-        $timestamp = Get-Date -Format o | ForEach-Object { $_ -replace ":", "." }
-        echo "timestamp=$timestamp" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
-
     - name: Build
       shell: cmd
       run: |
@@ -44,7 +37,7 @@ jobs:
       shell: powershell
       run: Compress-Archive Neovim nvim-win64.zip
 
-    - name: Upload
+    - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
         name: nvim-win64
@@ -56,6 +49,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Create timestamp
+      id: timestamp
+      shell: powershell
+      run: |
+        $timestamp = Get-Date -Format o | ForEach-Object { $_ -replace ":", "." }
+        echo "timestamp=$timestamp" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
