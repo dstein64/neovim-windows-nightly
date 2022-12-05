@@ -51,10 +51,9 @@ jobs:
     steps:
     - name: Create timestamp
       id: timestamp
-      shell: powershell
       run: |
-        $timestamp = Get-Date -Format o | ForEach-Object { $_ -replace ":", "." }
-        echo "timestamp=$timestamp" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+        TIMESTAMP="$(date --rfc-3339=ns | sed 's/:/./g' | sed 's/ /T/')"
+        echo "timestamp=${TIMESTAMP}" >> "${GITHUB_ENV}"
 
     - name: Create Release
       id: create_release
