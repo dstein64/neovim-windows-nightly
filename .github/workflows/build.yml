@@ -19,19 +19,21 @@ jobs:
     - name: Build
       shell: cmd
       run: |
-        call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
-        cd repo
-        mkdir .deps
-        cd .deps
-        cmake -G Ninja -DCMAKE_BUILD_TYPE=Release ..\cmake.deps
-        cmake --build .
-        cd ..
-        mkdir build
-        cd build
-        cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=..\..\Neovim ..
-        cmake --build .
-        ninja
-        ninja install
+        REM call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
+        REM cd repo
+        REM mkdir .deps
+        REM cd .deps
+        REM cmake -G Ninja -DCMAKE_BUILD_TYPE=Release ..\cmake.deps
+        REM cmake --build .
+        REM cd ..
+        REM mkdir build
+        REM cd build
+        REM cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=..\..\Neovim ..
+        REM cmake --build .
+        REM ninja
+        REM ninja install
+        mkdir Neovim
+        touch Neovim\nvim
 
     - name: Zip
       shell: powershell
