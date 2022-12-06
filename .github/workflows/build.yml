@@ -7,6 +7,11 @@ on:
 
 jobs:
   build:
+    # When the 'permissions' key is specified, unspecified permission scopes (e.g.,
+    # actions, checks, etc.) are set to no access (none).
+    permissions:
+      contents: read
+
     runs-on: windows-2022
 
     steps:
@@ -47,6 +52,11 @@ jobs:
 
   release:
     needs: build
+
+    # When the 'permissions' key is specified, unspecified permission scopes (e.g.,
+    # actions, checks, etc.) are set to no access (none).
+    permissions:
+      contents: write
 
     runs-on: ubuntu-latest
 
